@@ -1,56 +1,49 @@
-const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
-    path: path.join(__dirname, 'public/js'),
-    publicPath: '/public/js',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.join(__dirname, './public/js'),
+    publicPath: '/js'
   },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'scss'],
-    module: {
-      rules: [
-        {
-          test: /.ts(x?)$/,
-          loader: 'ts-loader',
-          exclude: /node_modules/
-        },
-        {
-          test: /.scss$/,
-          use: [
-            {
-              loader: 'style-loader'
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true
-              }
-            },
-            {
-              loader: 'sass-loader'
+  module: {
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
             }
-          ],
-          exclude: /node_modules/
-        }
-      ]
-    },
-    alias: {
-      '@': path.join(__dirname, 'src')
-    }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      }
+    ]
   },
-  devServer: {
-    contentBase: './public',
-    historyApiFallback: true
+  plugins: [new CleanWebpackPlugin()],
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, './src')
+    },
+    extensions: ['.tx', '.tsx', '.js', '.scss']
   },
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM'
-  },
-  plugins: [
-    new CleanWebpackPlugin()
-  ]
+  }
 }
