@@ -40,7 +40,7 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, './src')
     },
-    extensions: ['.tx', '.tsx', '.js', '.scss']
+    extensions: ['.ts', '.tsx', '.js', '.scss']
   },
   externals: {
     react: 'React',
