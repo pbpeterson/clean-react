@@ -1,0 +1,18 @@
+@import "../../styles/colors.scss";
+
+.header {
+  background-color: $primary;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  border-top: 3rem solid $primaryDark;
+
+  img {
+    margin: 2rem 0 0 0;
+  }
+
+  h3 {
+    color: $white;
+    margin: 1.6rem 0 2rem;
+  }
+}
