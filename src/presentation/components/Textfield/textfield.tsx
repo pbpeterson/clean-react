@@ -1,5 +1,5 @@
 import formContext from '@/presentation/context/formContext'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Styles from './textfield-styles.scss'
 
 type TextfieldProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -9,19 +9,26 @@ const TextField: React.FC<TextfieldProps> = (props: TextfieldProps) => {
     event.target.readOnly = false
   }
 
-  const { errorState } = useContext(formContext)
+  const { formState, setFormState } = useContext(formContext)
 
-  const getTitle = () => {
-    return errorState[props.name]
+  const getTitle = (): string => {
+    return formState[`${props.name}Error`]
   }
 
   const getStatus = (): string => {
     return '🔴'
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value
+    })
+  }
+
   return (
   <div className={Styles.inputWrap}>
-    <input {...props} readOnly onFocus={enableInput} />
+    <input {...props} data-testid={props.name} readOnly onFocus={enableInput} onChange={handleChange}/>
     <span title={getTitle()} data-testid={`${props.name}-status`} className={Styles.status}>{getStatus()}</span>
   </div>
   )
