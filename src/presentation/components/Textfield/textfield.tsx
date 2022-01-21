@@ -12,11 +12,11 @@ const TextField: React.FC<TextfieldProps> = (props: TextfieldProps) => {
   const { formState, setFormState } = useContext(formContext)
 
   const getTitle = (): string => {
-    return formState[`${props.name}Error`]
+    return formState[`${props.name}Error`] || 'Tudo certo!'
   }
 
   const getStatus = (): string => {
-    return '🔴'
+    return formState[`${props.name}Error`] ? '🔴' : '🟢'
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
