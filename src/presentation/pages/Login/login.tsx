@@ -5,12 +5,14 @@ import FormContext from '@/presentation/context/formContext'
 
 import Styles from './login-styles.scss'
 import { Validation } from '@/presentation/protocols/validation'
+import { Authentication } from '@/domain/usecases'
 
 type LoginProps = {
   validation: Validation
+  authentication: Authentication
 }
 
-const Login: React.FC<LoginProps> = ({ validation }: LoginProps) => {
+const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps) => {
   const [formState, setFormState] = useState({
     isLoading: false,
     email: '',
@@ -29,11 +31,15 @@ const Login: React.FC<LoginProps> = ({ validation }: LoginProps) => {
     })
   }, [formState.email, formState.password])
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setFormState({
       ...formState,
       isLoading: true
+    })
+    await authentication.auth({
+      email: formState.email,
+      password: formState.password
     })
   }
 
@@ -45,7 +51,7 @@ const Login: React.FC<LoginProps> = ({ validation }: LoginProps) => {
           <h2>Login</h2>
           <TextField type="email" name="email" placeholder="Digite seu email"/>
           <TextField type="password" name="password" placeholder="Digite sua senha"/>
-          <button disabled={!!formState.emailError || !!formState.password} className={Styles.submit} type="submit">Entrar</button>
+          <button disabled={!!formState.emailError || !!formState.passwordError} className={Styles.submit} type="submit">Entrar</button>
           <span className={Styles.link}>Criar conta</span>
           <FormStatus />
         </form>
