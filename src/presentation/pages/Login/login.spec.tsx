@@ -8,9 +8,8 @@ import {
 import Login from './login'
 import { ValidationStub } from '@/presentation/test'
 import faker from 'faker'
-import { Authentication, AuthenticationParams } from '@/domain/usecases'
-import { AccountModel } from '@/domain/models'
-import { mockAccountModel } from '@/domain/test'
+
+import { AuthenticationSpy } from '@/presentation/test/mock-authentication'
 
 type SutTypes = {
   sut: RenderResult
@@ -19,15 +18,6 @@ type SutTypes = {
 
 type SutParams = {
   validationError: string
-}
-
-export class AuthenticationSpy implements Authentication {
-  params?: AuthenticationParams
-  accessToken = mockAccountModel()
-  async auth (params: AuthenticationParams): Promise<AccountModel> {
-    this.params = params
-    return await Promise.resolve(this.accessToken)
-  }
 }
 
 const makeSut = (params?: SutParams): SutTypes => {
