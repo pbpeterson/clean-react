@@ -36,6 +36,11 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps)
     if (formState.isLoading) {
       return
     }
+
+    if (formState.emailError || formState.passwordError) {
+      return
+    }
+
     setFormState({
       ...formState,
       isLoading: true
@@ -50,7 +55,7 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps)
     <div className={Styles.login}>
       <LoginHeader />
       <FormContext.Provider value={{ formState, setFormState }}>
-        <form className={Styles.form} onSubmit={handleSubmit}>
+        <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <TextField type="email" name="email" placeholder="Digite seu email"/>
           <TextField type="password" name="password" placeholder="Digite sua senha"/>
