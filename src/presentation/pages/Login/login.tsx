@@ -1,6 +1,7 @@
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Footer, FormStatus, LoginHeader } from '@/presentation/components'
 import TextField from '@/presentation/components/Textfield/textfield'
-import React, { useEffect, useState } from 'react'
 import FormContext from '@/presentation/context/formContext'
 
 import Styles from './login-styles.scss'
@@ -13,6 +14,7 @@ type LoginProps = {
 }
 
 const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps) => {
+  const history = useHistory()
   const [formState, setFormState] = useState({
     isLoading: false,
     email: '',
@@ -51,6 +53,7 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps)
         password: formState.password
       })
       localStorage.setItem('accessToken', account.accessToken)
+      history.replace('/')
     } catch (error) {
       setFormState({
         ...formState,
@@ -69,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }: LoginProps)
           <TextField type="email" name="email" placeholder="Digite seu email"/>
           <TextField type="password" name="password" placeholder="Digite sua senha"/>
           <button disabled={!!formState.emailError || !!formState.passwordError} className={Styles.submit} type="submit">Entrar</button>
-          <span className={Styles.link}>Criar conta</span>
+          <Link data-testid="signup" to="/signup" className={Styles.link}>Criar conta</Link>
           <FormStatus />
         </form>
       </FormContext.Provider>
