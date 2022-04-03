@@ -45,5 +45,8 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM'
+  },
+  devServer: {
+    historyApiFallback: true
   }
 }
