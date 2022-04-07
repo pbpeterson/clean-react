@@ -1,18 +1,24 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, RenderResult } from '@testing-library/react'
 import TextField from './textfield'
 import Context from '@/presentation/context/formContext'
 
-describe('TextField', () => {
-  it('should begin with readonly', () => {
-    const { getByTestId } = render(
+const makeSut = (name: string): RenderResult => {
+  const result = render(
     <Context.Provider value={{
       formState: {}
     }}>
-      <TextField name='field'/>
+      <TextField name={name} />
     </Context.Provider>)
 
-    const input = getByTestId('field') as HTMLInputElement
+  return result
+}
+
+describe('TextField', () => {
+  it('should begin with readonly', () => {
+    const inputName = 'field'
+    const sut = makeSut(inputName)
+    const input = sut.getByTestId(inputName) as HTMLInputElement
 
     expect(input.readOnly).toBe(true)
   })
