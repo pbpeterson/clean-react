@@ -7,7 +7,7 @@ import {
   waitFor
 } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
-import Login from './login'
+import { Login } from '@/presentation/pages'
 import { ValidationStub } from '@/presentation/test'
 import faker from 'faker'
 import 'jest-localstorage-mock'
