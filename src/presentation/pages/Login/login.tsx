@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Footer, FormStatus, LoginHeader } from '@/presentation/components'
-import TextField from '@/presentation/components/Textfield/textfield'
+import { Footer, FormStatus, LoginHeader, Textfield as TextField } from '@/presentation/components'
 import FormContext from '@/presentation/context/formContext'
 
 import Styles from './login-styles.scss'

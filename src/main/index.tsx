@@ -1,4 +1,4 @@
-import Router from '@/presentation/components/Router/routes'
+import { Router } from '@/presentation/components'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import '@/presentation/styles/global.scss'
