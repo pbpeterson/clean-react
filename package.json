@@ -8,6 +8,7 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:ci": "yarn test -- --coverage",
     "test:watch": "yarn test -- --watch",
+    "lint": "eslint .",
     "test:staged": "yarn test -- --findRelatedTests",
     "prepare": "husky install"
   },
