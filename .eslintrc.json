@@ -14,6 +14,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/method-signature-style": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/prop-types": "off"
   }
 }
